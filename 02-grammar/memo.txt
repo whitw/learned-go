@@ -1,0 +1,150 @@
+go does not allow a grammar sth like...
+c = i++ //i++ does not return any value
+++i //prohibited
+
+for j : 5; j >= 0;j--
+	sum += j
+//error,auto semicolon at the end of the line beginning with for
+
+//, /**/ for the comments
+
+gofmt helps you to fit your code onto go-recommended style
+gofmt -h for help
+gofmt -w prog.go rewrite the code 'prog.go'
+
+=========VARIABLES============
+
+go variables
+
+zero values
+int: 0
+real number: 0
+string types: ""
+
+var a int
+var name, id, address string
+var(
+	name string
+	age int
+	weight float
+)
+var c = true
+var size = uint16(1024)
+start := 1
+
+if v := getValue() {
+	fmt.Println(v)
+}
+
+GO CONVENTIONS
+write your variable name as short as you can
+use CamelCase or camelCase if you need to use variable name with multiple words.
+use noun without Get for the name of function/method that returns some Objects(no Get for Getter)
+use Set for the Setter
+
+const limit = 64
+const max uint64 = 1024
+const (
+	RED = 0
+	ORANGE = 1
+	YELLOW = 2
+)
+
+const (
+	Sunday = iota //assign value begins from 0 and increases 1 after each line.
+	Monday
+	Tuesday //=2
+	Wednesday //=3
+)
+
+
+type ByteSize int64
+const (
+	_ = iota
+	KB ByteSize = 1 << (10 * iota) //1 << (10*1)
+	MB //MB ByteSize = 1<< (10 * 2)
+	GB
+	TB
+	PB
+)
+
+const (
+	Running = 1 << iota
+	Waiting //2
+	Send //4
+	Receive //8
+)
+
+============IF==============
+
+if cond {
+	//cond MUST be the boolean type
+}
+
+if cond {
+} else {
+}
+
+if cond {
+} else if {
+} else {
+}
+
+} MUST BE IN THE SAME LINE WITH THE FOLLOWING else(auto trailling semicolon)
+
+if initial_state;condition {
+}
+
+if v:= compute();v < 0 {
+
+}
+
+==========SWITCH==============
+
+switch value {
+	case 0,1,2:
+		...
+	case 3:
+		...
+	default:
+		...
+}
+//AUTO BREAK, use "fallthrough" if you don't need an auto break
+
+switch value{
+	case 0:
+		doThis()
+		fallthrough
+	case 1:
+		doThat()
+		...
+}
+
+switch {
+	case cond1:
+		//run and break if cond1 is true
+	case cond2:
+		//run and break if cond1 is false and cond2 is true
+	...
+}
+
+switch initial_state;{
+	case cond1:
+		...
+}
+variables that assigned at initial state are only available in the switch block.
+
+==============FOR===============
+for initial_state; cond1; trailling_work {
+	...
+}
+you can initial_state and trailling work
+for cond {
+}
+
+even the condition can be skipped;
+for {
+}
+
+you can put label on the for block
+forlabel.go
